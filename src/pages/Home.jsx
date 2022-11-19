@@ -1,11 +1,13 @@
 import { Container, Heading, Loader, Section } from 'components';
 
-export const Home = () => {
+const Home = () => {
   return (
     <Section>
       <Container>
-        <h2>Home</h2>
+        <h2 className="text-3xl font-bold underline">Home</h2>
       </Container>
     </Section>
   );
 };
+
+export default Home;

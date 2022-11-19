@@ -11,7 +11,7 @@ import {
   NavLinkStyled,
 } from './Header.styled';
 
-export const Header = () => {
+const Header = () => {
   const theme = useTheme();
 
   return (
@@ -23,7 +23,7 @@ export const Header = () => {
 
             <LinkWrapper>
               <NavLinkStyled to="/">Home</NavLinkStyled>
-              <NavLinkStyled to="/country">Countries</NavLinkStyled>
+              <NavLinkStyled to="/cabinet">My cabinet</NavLinkStyled>
             </LinkWrapper>
           </HeaderWrapper>
         </Container>
@@ -33,3 +33,5 @@ export const Header = () => {
     </>
   );
 };
+
+export default Header;
