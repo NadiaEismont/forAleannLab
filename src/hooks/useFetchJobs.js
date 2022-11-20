@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getListOfJobs } from 'service/country-service';
+import { getListOfJobs } from 'service/jobsApi';
 
 
 export const useFetchJobs = () => {

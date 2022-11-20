@@ -22,7 +22,7 @@ const Header = () => {
             <FaFlagUsa size="40px" color={theme.colors.light} />
 
             <LinkWrapper>
-              <NavLinkStyled to="/">Home</NavLinkStyled>
+              <NavLinkStyled to="/">Jobs list</NavLinkStyled>
               <NavLinkStyled to="/cabinet">My cabinet</NavLinkStyled>
             </LinkWrapper>
           </HeaderWrapper>
