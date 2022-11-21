@@ -9,10 +9,8 @@ export const GlobalStyles = css`
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
-    background: ${theme.colors.mainBackground};
+   font-family: Proxima Nova, sans-serif;
+    background: white;
     min-height: 100vh;
 
     font-style: normal;
@@ -47,7 +45,7 @@ export const GlobalStyles = css`
     font: inherit;
     color: inherit;
     background-color: transparent;
-    cursor: pointer;
+ 
   }
 
   a {
@@ -56,7 +54,6 @@ export const GlobalStyles = css`
   }
 
   code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+    font-family: Proxima Nova;
   }
 `;

@@ -19,8 +19,7 @@ const Header = () => {
       <NavBar>
         <Container>
           <HeaderWrapper>
-            <FaFlagUsa size="40px" color={theme.colors.light} />
-
+            {/* <FaFlagUsa size="40px" color={theme.colors.light} /> */}
             <LinkWrapper>
               <NavLinkStyled to="/">Jobs list</NavLinkStyled>
               <NavLinkStyled to="/cabinet">My cabinet</NavLinkStyled>

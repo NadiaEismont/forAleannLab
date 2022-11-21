@@ -49,7 +49,7 @@ const DetailedJob = () => {
                 <h2>Attached images</h2>
                 <div>
                   {job.pictures.map(e => (
-                    <div>{e}</div>
+                    <img src={e} alt="" />
                   ))}
                 </div>
               </Container>
