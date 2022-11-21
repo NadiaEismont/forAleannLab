@@ -22,11 +22,25 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const NavLinkStyled = styled(NavLink)`
-  color: ${props => props.theme.colors.light};
+  color: ${props => props.theme.colors.dark};
   font-size: ${props => props.theme.fontSizes.medium};
   font-weight: 700;
-
+   align-items: center;
+     display: inline-flex;
+ border-radius: 24px;
+ box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+   color: #3c4043;
   text-transform: uppercase;
+ height: 58px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+
+
+
 
   transition-property: color, background-color, transform;
   transition-duration: 0.2s;
@@ -36,16 +50,14 @@ export const NavLinkStyled = styled(NavLink)`
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.colors.white};
+    color: ${props => props.theme.colors.hoverColor};
+    background-color:  ${props => props.theme.colors.hoverBg};
+     box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30 %), 0 8px 12px 6px rgb(60 64 67 / 15 %);
   }
 
   &.active {
     color: ${props => props.theme.colors.white};
     background-color: ${props => props.theme.colors.accent};
-
-    padding: 6px 12px;
-    border-radius: 4px;
-
     transform: scale(1);
     pointer-events: none;
   }

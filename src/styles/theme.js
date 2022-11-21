@@ -5,6 +5,8 @@ export const theme = Object.freeze({
     light: 'rgba(255,255,255,.5)',
     dark: '#240b36',
     primary: '#22a6b3',
+    hoverColor: ' #174ea6',
+    hoverBg: '#F6F9FE;',
     mainBackground: ['linear-gradient(to top, #0f2027, #203a43, #2c5364)'],
     imageBackground: ['red', 'linear-gradient (90deg, #ff9966,#ff5e62'],
   },
