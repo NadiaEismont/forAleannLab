@@ -4,6 +4,7 @@ import { useFetchJobs } from 'hooks/useFetchJobs';
 import { useLocation } from 'react-router-dom';
 import { BsBookmark } from 'react-icons/bs';
 import { TiLocation } from 'react-icons/ti';
+import timeSince from 'utils';
 
 const Jobs = () => {
   const { jobs, error, isLoading } = useFetchJobs(0);
@@ -20,34 +21,47 @@ const Jobs = () => {
                 key={id}
                 className="font-sans font-family:Proxima Nova py-6 px-6 mb-2 border rounded-lg shadow-slate-50 "
               >
-                <Link to={`/jobs/${id}`} state={{ from: page }}>
-                  {/* <div className="grig grid-columns-2 gap-4"> */}
-                  <div className="mx-auto grid grid-cols-1 grid-columns-2">
-                    <div className="p-0 col-start-1 row-start-1">
-                      <img src={`${pictures[0]}`} alt="" />
+                {/* grid-template-columns: 2fr 1fr 1fr; */}
+
+                {/* <div className="grig grid-columns-2 gap-4"> */}
+                <div className="mx-auto flex flex-cols-4 flex-row justify-between">
+                  <div className="shrink-0">
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={`${pictures[0]}?random=${Math.floor(
+                        Math.random() * 100000,
+                      )}`}
+                      alt=""
+                    />
+                  </div>
+                  <div className="">
+                    <Link to={`/jobs/${id}`} state={{ from: page }}>
                       <h3 className="cursor-pointer font-bold text-3xl text-[#3A4562] hover:text-violet-600">
                         {title}
                       </h3>
-                      <p className="text-[#878D9D] text-lg">{name}</p>
-                      {/* <TiLocation /> */}
-                      <p className="text-[#878D9D] text-lg">{address}</p>
-                      {/* <p className="text-[#878D9D] text-lg">{location}</p> */}
-                    </div>
-                    <div className="mt-0 col-start-2 row-start-1 row-span-2">
+                    </Link>
+                    <p className="text-[#878D9D] text-lg">{name}</p>
+                    {/* <TiLocation /> */}
+                    <p className="text-[#878D9D] text-lg">{address}</p>
+                    {/* <p className="text-[#878D9D] text-lg">{location}</p> */}
+                  </div>
+                  <div className="w-20">star</div>
+                  <div className="flex flex-col justify-between mx-auto w-34 shrink-0">
+                    <div className="justify-self-end  ">
                       <BsBookmark />
                     </div>
-                    <div className="mt-0 col-start-2 grid-columns-2  row-span-2">
+                    <div className="">
                       <p className="text-[#878D9D] text-lg justify-between">
-                        {createdAt}
+                        Posted &nbsp;
+                        {timeSince(Date.parse(createdAt))} ago
                       </p>
                     </div>
                   </div>
-                </Link>
+                </div>
               </li>
             ),
           )}
         </ul>
-        {/* </div> */}
       </Container>
     </Section>
   );

@@ -3,6 +3,8 @@ import { Section, Container, Loader } from 'components';
 import { useFetchJob } from 'hooks/useFetchJob';
 import { useLocation, useParams } from 'react-router-dom';
 import GoogleMap from 'components/GoogleMap';
+import { BsBookmark } from 'react-icons/bs';
+import { BsFillShareFill } from 'react-icons/bs';
 
 const DetailedJob = () => {
   const { jobId } = useParams();
@@ -13,60 +15,87 @@ const DetailedJob = () => {
 
   return (
     <>
-      {job && (
-        <Section>
-          <Container>
-            <header>
-              <Link to={'/'} state={{ from: page }}>
-                Job Details
-              </Link>
+      <Container>
+        {job && (
+          <Section>
+            <div className="flex">
+              <Container>
+                <header className="border-b">
+                  <div className="flex justify-between ">
+                    <Link
+                      to={'/'}
+                      state={{ from: page }}
+                      className="cursor-pointer text-[#3A4562] font-bold text-3xl "
+                    >
+                      Job Details
+                    </Link>
+                    <div className="flex items-baseline">
+                      <BsBookmark className="text-2xl mx-4 text-[#3A4562]" />
+                      <button
+                        className="leading-7 font-normal text-lg mr-6 text-[#3A4562]"
+                        type="button"
+                      >
+                        Save to my list
+                      </button>
+                      <BsFillShareFill className="text-2xl mx-4 text-[#3A4562]" />
+                      <button
+                        className="font-normal text-lg text-[#3A4562]"
+                        type="button"
+                      >
+                        Share
+                      </button>
+                    </div>
+                  </div>
+                </header>
+                <body>
+                  <Container>
+                    <button type="button">Apply now</button>
+                    <h1>{job.title}</h1>
+                    <h2>{job.salary} Brutto, per year</h2>
+                    <p>{job.createdAt}</p>
+                    <p>{job.description}</p>
+                    <button type="button">Apply now</button>
+                  </Container>
+                  <Container>
+                    <h2>Additional info</h2>
+                    <p>Employment type</p>
+                    {job.employment_type.map(e => (
+                      <div>{e}</div>
+                    ))}
+                    <p>Benefits</p>
+                    {job.benefits.map(e => (
+                      <div>{e}</div>
+                    ))}
+                  </Container>
+                  <Container>
+                    <h2>Attached images</h2>
+                    <div>
+                      {job.pictures.map(e => (
+                        <img
+                          src={`${e}?random=${Math.floor(
+                            Math.random() * 100000,
+                          )}`}
+                          alt=""
+                        />
+                      ))}
+                    </div>
+                  </Container>
+                </body>
+                <button type="button">RETURN TO JOB BOARD</button>
+              </Container>
               <div>
-                <button type="button">Save to my list</button>
-                <button type="button">Share</button>
-              </div>
-            </header>
-            <body>
-              <Container>
-                <button type="button">Apply now</button>
-                <h1>{job.title}</h1>
-                <h2>{job.salary} Brutto, per year</h2>
-                <p>{job.createdAt}</p>
-                <p>{job.description}</p>
-                <button type="button">Apply now</button>
-              </Container>
-              <Container>
-                <h2>Additional info</h2>
-                <p>Employment type</p>
-                {job.employment_type.map(e => (
-                  <div>{e}</div>
-                ))}
-                <p>Benefits</p>
-                {job.benefits.map(e => (
-                  <div>{e}</div>
-                ))}
-              </Container>
-              <Container>
-                <h2>Attached images</h2>
+                <h2>{job.name}</h2>
+                <p>{job.address}</p>
+                <p>{job.phone}</p>
+                <p>{job.email}</p>
                 <div>
-                  {job.pictures.map(e => (
-                    <img src={e} alt="" />
-                  ))}
+                  <GoogleMap location={job.location} />
                 </div>
-              </Container>
-            </body>
-            <button type="button">RETURN TO JOB BOARD</button>
-          </Container>
-          <Container>
-            <h2>{job.name}</h2>
-            <p>{job.address}</p>
-            <p>{job.phone}</p>
-            <p>{job.email}</p>
-            <div>
-              <GoogleMap location={job.location} />
+              </div>
             </div>
-          </Container>
-        </Section>
-      )}
+          </Section>
+        )}
+      </Container>
     </>
   );
 };
