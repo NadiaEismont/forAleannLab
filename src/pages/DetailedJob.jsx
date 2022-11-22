@@ -6,6 +6,7 @@ import GoogleMap from 'components/GoogleMap';
 import { BsBookmark } from 'react-icons/bs';
 import { BsFillShareFill } from 'react-icons/bs';
 import timeSince from 'utils';
+import { MdLocationPin } from 'react-icons/md';
 
 const DetailedJob = () => {
   const { jobId } = useParams();
@@ -81,21 +82,27 @@ const DetailedJob = () => {
                 </div>
                 <div className="text-[#3A4562]">
                   <h2 className="font-bold text-3xl">Additional info</h2>
-                  <p className="text-lg font-normal">Employment type</p>
-                  {job.employment_type.map(e => (
-                    <ul>
-                      <li className="w-[222px] h-[49px] border-2 border-[#55699e/30] rounded-lg">
+                  <p className="text-lg font-normal mb-3">Employment type</p>
+                  <ul>
+                    {job.employment_type.map(e => (
+                      <li className="w-[222px] h-[49px] border border-[#55699e] bg-[#55699e]/30 mb-6 text-[#55699E] font-bold text-base rounded-lg text-center self-center self-auto">
                         {e}
                       </li>
-                    </ul>
-                  ))}
-                  <p className="text-lg font-normal">Benefits</p>
-                  {job.benefits.map(e => (
-                    <div>{e}</div>
-                  ))}
+                    ))}
+                  </ul>
+                  <p className="text-lg font-normal mb-3">Benefits</p>
+                  <ul className="flex justify-start">
+                    {job.benefits.map(e => (
+                      <li className="mb-20 mr-2 w-[220px] h-[49px] border border-[#FFCF00] bg-[#FFCF00]/30 text-[#988B49] font-bold text-base rounded-lg text-center">
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div>
-                  <h2>Attached images</h2>
+                  <h2 className="font-bold text-3xl text-[#3A4562]">
+                    Attached images
+                  </h2>
                   <div>
                     {job.pictures.map(e => (
                       <img
@@ -117,12 +124,17 @@ const DetailedJob = () => {
                 className="absolute -translate-x-1/4  bg-[#202336] rounded-full w-80 h-80  -z-10"
               ></div>
               <div className="px-16 pt-8 pb-4">
-                <h2 className="z-10 font-bold text-xl">{job.name}</h2>
-                <p className="z-10 font-normal text-lg">{job.address}</p>
+                <h2 className="z-10 font-bold text-xl mb-2">{job.name}</h2>
+
+                <p className="z-10 font-normal text-lg ">
+                  <MdLocationPin className="inline mr-1 fill-[#D8D8D8] text-2xl" />
+                  {job.address}
+                </p>
                 <p className="z-10 font-normal text-lg">{job.phone}</p>
                 <p className="z-10 font-normal text-lg">{job.email}</p>
               </div>
               <div className="flex-none">
+                <MdLocationPin className="absolute inset-y-80 inset-x-32 text-4xl" />
                 <GoogleMap location={job.location} />
               </div>
             </div>

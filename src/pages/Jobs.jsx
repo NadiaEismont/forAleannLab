@@ -3,7 +3,7 @@ import { Section, Container, CountryInfo, Loader } from 'components';
 import { useFetchJobs } from 'hooks/useFetchJobs';
 import { useLocation } from 'react-router-dom';
 import { BsBookmark } from 'react-icons/bs';
-import { TiLocation } from 'react-icons/ti';
+import { MdLocationPin } from 'react-icons/md';
 import timeSince from 'utils';
 
 const Jobs = () => {
@@ -41,7 +41,7 @@ const Jobs = () => {
                       </h3>
                     </Link>
                     <p className="text-[#878D9D] text-lg">{name}</p>
-                    {/* <TiLocation /> */}
+                    <MdLocationPin />
                     <p className="text-[#878D9D] text-lg">{address}</p>
                     {/* <p className="text-[#878D9D] text-lg">{location}</p> */}
                   </div>
