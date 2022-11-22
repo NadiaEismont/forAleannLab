@@ -19,7 +19,7 @@ const DetailedJob = () => {
         {job && (
           <Section>
             <div className="flex">
-              <Container>
+              <Container className="w-3/5">
                 <header className="border-b">
                   <div className="flex justify-between ">
                     <Link
@@ -49,7 +49,12 @@ const DetailedJob = () => {
                 </header>
                 <body>
                   <Container>
-                    <button type="button">Apply now</button>
+                    <button
+                      type="button"
+                      className="w-[127px] h-[58px] bg-[#2A3047] rounded-lg text-white font-semibold text-xs uppercase mt-10 mb-9  hover:text-violet-600"
+                    >
+                      Apply now
+                    </button>
                     <h1>{job.title}</h1>
                     <h2>{job.salary} Brutto, per year</h2>
                     <p>{job.createdAt}</p>
@@ -83,7 +88,8 @@ const DetailedJob = () => {
                 </body>
                 <button type="button">RETURN TO JOB BOARD</button>
               </Container>
-              <div>
+              <div className="z-10 w={584} h={728} bg-[#2A3047] layout='fill' objectFit='cover'">
+                <div className="relative -translate-x-2/4 bottom-6 bg-[#202336] rounded-full w-80 h-80 overflow-hidden z-0"></div>
                 <h2>{job.name}</h2>
                 <p>{job.address}</p>
                 <p>{job.phone}</p>
