@@ -36,27 +36,6 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                     >
                       Save to my list
                     </button>
-                    {/* <button
-                      className="self-end"
-                      onClick={
-                        savedJobs.some(job => job.id === id)
-                          ? () => onJobDelete(job.id)
-                          : () =>
-                              onJobSave({
-                                id,
-                                title,
-                                address,
-                                pictures,
-                                createdAt,
-                              })
-                      }
-                    >
-                      {savedJobs.some(job => job.id === id) ? (
-                        <BsBookmarkFill />
-                      ) : (
-                        <BsBookmark />
-                      )}
-                    </button> */}
 
                     <BsFillShareFill className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
                     <button
