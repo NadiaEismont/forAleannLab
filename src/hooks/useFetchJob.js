@@ -13,7 +13,7 @@ export const useFetchJob = (jobId) => {
         const fetchData = async () => {
             try {
                 const data = await getListOfJobs();
-                setJobs(data[0]);
+                setJobs(data.find(job => job.id === jobId));
             } catch (error) {
                 console.error(error);
                 setError(error.message);

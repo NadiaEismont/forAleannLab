@@ -1,19 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Section, Container, Loader } from 'components';
+import { Section } from 'components';
 import { useFetchJob } from 'hooks/useFetchJob';
 import { useLocation, useParams } from 'react-router-dom';
 import GoogleMap from 'components/GoogleMap';
 import { BsBookmark } from 'react-icons/bs';
 import { BsFillShareFill } from 'react-icons/bs';
-import timeSince from 'utils';
-import { MdLocationPin } from 'react-icons/md';
+import timeSince from 'utils/utils';
+import { MdLocationPin, MdKeyboardArrowLeft } from 'react-icons/md';
 
-const DetailedJob = () => {
+const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
   const { jobId } = useParams();
-  const { job, error, isLoading } = useFetchJob(jobId);
+  const { job } = useFetchJob(jobId);
   const page = useLocation();
-
-  console.log(job);
 
   return (
     <>
@@ -31,14 +29,36 @@ const DetailedJob = () => {
                     Job Details
                   </Link>
                   <div className="flex items-baseline">
-                    <BsBookmark className="text-2xl mx-4 text-[#3A4562]" />
+                    <BsBookmark className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
                     <button
                       className="leading-7 font-normal text-lg mr-6 text-[#3A4562]"
                       type="button"
                     >
                       Save to my list
                     </button>
-                    <BsFillShareFill className="text-2xl mx-4 text-[#3A4562]" />
+                    {/* <button
+                      className="self-end"
+                      onClick={
+                        savedJobs.some(job => job.id === id)
+                          ? () => onJobDelete(job.id)
+                          : () =>
+                              onJobSave({
+                                id,
+                                title,
+                                address,
+                                pictures,
+                                createdAt,
+                              })
+                      }
+                    >
+                      {savedJobs.some(job => job.id === id) ? (
+                        <BsBookmarkFill />
+                      ) : (
+                        <BsBookmark />
+                      )}
+                    </button> */}
+
+                    <BsFillShareFill className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
                     <button
                       className="font-normal text-lg text-[#3A4562]"
                       type="button"
@@ -52,7 +72,7 @@ const DetailedJob = () => {
                 <div className="text-[#3A4562]">
                   <button
                     type="button"
-                    className="w-[127px] h-[58px] bg-[#2A3047] rounded-lg text-white font-semibold text-xs uppercase mt-10 mb-9  hover:text-violet-600"
+                    className="w-[127px] h-[58px] bg-[#2A3047] rounded-lg text-white font-semibold text-xs uppercase mt-10 mb-9  hover:bg-[#55699e]/50"
                   >
                     Apply now
                   </button>
@@ -75,17 +95,19 @@ const DetailedJob = () => {
                   <p>{job.description}</p>
                   <button
                     type="button"
-                    className="w-[127px] h-[58px] bg-[#2A3047] rounded-lg text-white font-semibold text-xs uppercase mt-10 mb-9  hover:text-violet-600"
+                    className="w-[127px] h-[58px] bg-[#2A3047] rounded-lg text-white font-semibold text-xs uppercase mt-10 mb-9  hover:bg-[#55699e]/50"
                   >
                     Apply now
                   </button>
                 </div>
                 <div className="text-[#3A4562]">
-                  <h2 className="font-bold text-3xl">Additional info</h2>
+                  <h2 className="font-bold text-3xl border-b mb-3.5">
+                    Additional info
+                  </h2>
                   <p className="text-lg font-normal mb-3">Employment type</p>
-                  <ul>
+                  <ul className="flex justify-start">
                     {job.employment_type.map(e => (
-                      <li className="w-[222px] h-[49px] border border-[#55699e] bg-[#55699e]/30 mb-6 text-[#55699E] font-bold text-base rounded-lg text-center self-center self-auto">
+                      <li className="leading-[49px] w-[222px] h-[49px] mr-2 border border-[#55699e] bg-[#55699e]/30 mb-6 text-[#55699E] font-bold text-base rounded-lg text-center">
                         {e}
                       </li>
                     ))}
@@ -93,19 +115,20 @@ const DetailedJob = () => {
                   <p className="text-lg font-normal mb-3">Benefits</p>
                   <ul className="flex justify-start">
                     {job.benefits.map(e => (
-                      <li className="mb-20 mr-2 w-[220px] h-[49px] border border-[#FFCF00] bg-[#FFCF00]/30 text-[#988B49] font-bold text-base rounded-lg text-center">
+                      <li className="flex justify-center items-center mb-20 mr-2 w-[220px] h-[49px] border border-[#FFCF00] bg-[#FFCF00]/30 text-[#988B49] font-bold text-base rounded-lg text-center">
                         {e}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h2 className="font-bold text-3xl text-[#3A4562]">
+                  <h2 className="font-bold text-3xl text-[#3A4562] border-b mb-4">
                     Attached images
                   </h2>
-                  <div>
+                  <div className="flex justify-start">
                     {job.pictures.map(e => (
                       <img
+                        className="mr-2 w-[200px] h-[103px] rounded-lg"
                         src={`${e}?random=${Math.floor(
                           Math.random() * 100000,
                         )}`}
@@ -115,7 +138,16 @@ const DetailedJob = () => {
                   </div>
                 </div>
               </body>
-              <button type="button">RETURN TO JOB BOARD</button>
+
+              <Link to="/">
+                <button
+                  className="w-[213px] h-[50px] bg-[#e4e5ea] rounded-lg font-semibold text-xs font-semibold hover:bg-gray-300"
+                  type="button"
+                >
+                  <MdKeyboardArrowLeft className="inline mr-1  text-4xl font-thin" />
+                  RETURN TO JOB BOARD
+                </button>
+              </Link>
             </div>
             <div className="flex flex-col justify-between relative z-30 w-[402px] max-h-[436px] bg-[#2A3047] overflow-hidden  text-[#E8EBF3]">
               <div
