@@ -9,7 +9,7 @@ import './input.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <BrowserRouter>
+  <BrowserRouter basename='/forAleannLab'>
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyles} />
       <App />
