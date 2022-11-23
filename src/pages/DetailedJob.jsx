@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+
 import { Section } from 'components';
 import { useFetchJob } from 'hooks/useFetchJob';
-import { useLocation, useParams } from 'react-router-dom';
-import GoogleMap from 'components/GoogleMap';
-import { BsBookmark } from 'react-icons/bs';
-import { BsFillShareFill } from 'react-icons/bs';
 import timeSince from 'utils/utils';
+import GoogleMap from 'components/GoogleMap';
+
+import { BsBookmark } from 'react-icons/bs';
+import { BsFillShareFill, BsBookmarkFill } from 'react-icons/bs';
 import { MdLocationPin, MdKeyboardArrowLeft } from 'react-icons/md';
+import { nanoid } from 'nanoid';
 
 const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
   const { jobId } = useParams();
   const { job } = useFetchJob(jobId);
+
   const page = useLocation();
 
   return (
@@ -29,12 +33,26 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                     Job Details
                   </Link>
                   <div className="flex items-baseline">
-                    <BsBookmark className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
+                    {/* <BsBookmark className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
                     <button
                       className="leading-7 font-normal text-lg mr-6 text-[#3A4562]"
                       type="button"
                     >
                       Save to my list
+                    </button> */}
+                    <button
+                      className="leading-7 font-normal text-lg mr-6 text-[#3A4562]"
+                      onClick={
+                        savedJobs.some(j => j.id === jobId)
+                          ? () => onJobDelete(jobId)
+                          : () => onJobSave(job)
+                      }
+                    >
+                      {savedJobs.some(j => j.id === jobId) ? (
+                        <BsBookmarkFill className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
+                      ) : (
+                        <BsBookmark className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
+                      )}
                     </button>
 
                     <BsFillShareFill className="text-2xl mx-4 text-[#3A4562] hover:scale-125 " />
@@ -47,7 +65,7 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                   </div>
                 </div>
               </header>
-              <body>
+              <div>
                 <div className="text-[#3A4562]">
                   <button
                     type="button"
@@ -86,7 +104,10 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                   <p className="text-lg font-normal mb-3">Employment type</p>
                   <ul className="flex justify-start">
                     {job.employment_type.map(e => (
-                      <li className="leading-[49px] w-[222px] h-[49px] mr-2 border border-[#55699e] bg-[#55699e]/30 mb-6 text-[#55699E] font-bold text-base rounded-lg text-center">
+                      <li
+                        key={e}
+                        className="leading-[49px] w-[222px] h-[49px] mr-2 border border-[#55699e] bg-[#55699e]/30 mb-6 text-[#55699E] font-bold text-base rounded-lg text-center"
+                      >
                         {e}
                       </li>
                     ))}
@@ -94,7 +115,10 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                   <p className="text-lg font-normal mb-3">Benefits</p>
                   <ul className="flex justify-start">
                     {job.benefits.map(e => (
-                      <li className="flex justify-center items-center mb-20 mr-2 w-[220px] h-[49px] border border-[#FFCF00] bg-[#FFCF00]/30 text-[#988B49] font-bold text-base rounded-lg text-center">
+                      <li
+                        key={e}
+                        className="flex justify-center items-center mb-20 mr-2 w-[220px] h-[49px] border border-[#FFCF00] bg-[#FFCF00]/30 text-[#988B49] font-bold text-base rounded-lg text-center"
+                      >
                         {e}
                       </li>
                     ))}
@@ -104,9 +128,10 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                   <h2 className="font-bold text-3xl text-[#3A4562] border-b mb-4">
                     Attached images
                   </h2>
-                  <div className="flex justify-start">
+                  <div className="flex justify-start mb-20">
                     {job.pictures.map(e => (
                       <img
+                        key={nanoid()}
                         className="mr-2 w-[200px] h-[103px] rounded-lg"
                         src={`${e}?random=${Math.floor(
                           Math.random() * 100000,
@@ -116,7 +141,7 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
                     ))}
                   </div>
                 </div>
-              </body>
+              </div>
 
               <Link to="/">
                 <button
@@ -129,11 +154,7 @@ const DetailedJob = ({ savedJobs, jobs, onJobSave, onJobDelete }) => {
               </Link>
             </div>
             <div className="flex flex-col justify-between relative z-30 w-[402px] max-h-[436px] bg-[#2A3047] overflow-hidden  text-[#E8EBF3]">
-              <div
-                objectFit="cover"
-                layout="fill"
-                className="absolute -translate-x-1/4  bg-[#202336] rounded-full w-80 h-80  -z-10"
-              ></div>
+              <div className="absolute -translate-x-1/4  bg-[#202336] rounded-full w-80 h-80  -z-10"></div>
               <div className="px-16 pt-8 pb-4">
                 <h2 className="z-10 font-bold text-xl mb-2">{job.name}</h2>
 

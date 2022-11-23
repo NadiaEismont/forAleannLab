@@ -36,7 +36,7 @@ export const App = () => {
   return (
     <div>
       <Header class="px-5 md:px-0" />
-      <div paddingTop="60px">
+      <div>
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
@@ -59,7 +59,16 @@ export const App = () => {
                 />
               }
             />
-            <Route path="/jobs/:jobId" element={<DetailedJob />} />
+            <Route
+              path="/jobs/:jobId"
+              element={
+                <DetailedJob
+                  savedJobs={jobs}
+                  onJobSave={onJobSave}
+                  onJobDelete={onJobDelete}
+                />
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
